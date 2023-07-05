@@ -31,8 +31,8 @@
 #include <sys/ioctl.h>
 
 #define BUFSIZE 2048
-#define DEBUG_SEND
-#define DEBUG_RECV
+//#define DEBUG_SEND
+//#define DEBUG_RECV
 
 char 		*ref1;
 char 		*ref2;

@@ -361,7 +361,7 @@ int main(int argc, char **argv)
 				memcpy(&buf[20], ref2, 6);
 				buf[26] = ' ';
 				buf[27] = mod2[0];
-				memcpy(&buf[28], ref2, 6);
+				memcpy(&buf[28], callsign, 6);
 				buf[34] = ' ';
 				buf[35] = 'G';
 				streamid = (buf[14] << 8) | (buf[15] & 0xff);
@@ -380,7 +380,7 @@ int main(int argc, char **argv)
 				memcpy(&buf[20], ref2, 6);
 				buf[26] = ' ';
 				buf[27] = mod2[0];
-				memcpy(&buf[28], ref2, 6);
+				memcpy(&buf[28], callsign, 6);
 				buf[34] = ' ';
 				buf[35] = 'G';
 				streamid = (buf[14] << 8) | (buf[15] & 0xff);
@@ -399,7 +399,7 @@ int main(int argc, char **argv)
 				memcpy(&buf[20], ref1, 6);
 				buf[26] = ' ';
 				buf[27] = mod1[0];
-				memcpy(&buf[28], ref2, 6);
+				memcpy(&buf[28], callsign, 6);
 				buf[34] = ' ';
 				buf[35] = 'G';
 				streamid = (buf[14] << 8) | (buf[15] & 0xff);

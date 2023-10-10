@@ -418,6 +418,12 @@ int main(int argc, char **argv)
 		if((rxlen == 0x1d) || (rxlen == 0x20)){
 			uint16_t s = (buf[14] << 8) | (buf[15] & 0xff);
 			if(s == streamid){
+				if((buf[16] & 0x40) != 0){
+					static const uint8_t eot[] = {0x9E,0x8D,0x32,0x88,0x26,0x1A,0x3F,0x61,0xE8, 0x55,0x55,0x55, 0x55,0xC8,0x7A};
+					memcpy(&buf[17], eot, 15);
+					buf[0] = 0x20;
+					rxlen = 0x20;
+				}
 				if( (udprx == udp1) && (rx.sin_addr.s_addr == host1.sin_addr.s_addr) ){
 					sendto(udp2, buf, rxlen, 0, (const struct sockaddr *)&host2, sizeof(host2));
 #ifdef DEBUG_SEND

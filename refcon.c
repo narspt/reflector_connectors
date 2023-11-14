@@ -124,7 +124,7 @@ void process_signal(int sig)
 			host2_connect = 1;
 			fprintf(stderr, "%s ping timeout\n", ref2);
 		}
-		alarm(5);
+		alarm(15);
 	}
 }
 
@@ -227,7 +227,7 @@ int main(int argc, char **argv)
 	host2_cnt = 0;
 	host1_connect = 1;
 	host2_connect = 1;
-	alarm(5);
+	alarm(15);
 
 	while (1) {
 		if(host1_connect){
@@ -238,7 +238,10 @@ int main(int argc, char **argv)
 			buf[3] = 0x00;
 			buf[4] = 0x01;
 			sendto(udp1, buf, 5, 0, (const struct sockaddr *)&host1, sizeof(host1));
-			fprintf(stderr, "Connecting to %s...\n", ref1);
+			char t_str[30];
+			time_t t = time(NULL);
+			strftime(t_str, sizeof(t_str), "%Y-%m-%d %H:%M:%S", localtime(&t));
+			fprintf(stderr, "Connecting to %s... (%s)\n", ref1, t_str);
 		}
 		if(host2_connect){
 			host2_connect = 0;
@@ -248,7 +251,10 @@ int main(int argc, char **argv)
 			buf[3] = 0x00;
 			buf[4] = 0x01;
 			sendto(udp2, buf, 5, 0, (const struct sockaddr *)&host2, sizeof(host2));
-			fprintf(stderr, "Connecting to %s...\n", ref2);
+			char t_str[30];
+			time_t t = time(NULL);
+			strftime(t_str, sizeof(t_str), "%Y-%m-%d %H:%M:%S", localtime(&t));
+			fprintf(stderr, "Connecting to %s... (%s)\n", ref2, t_str);
 		}
 		FD_ZERO(&udpset);
 		FD_SET(udp1, &udpset);
